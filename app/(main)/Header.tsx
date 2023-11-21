@@ -29,6 +29,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { clamp } from "@/lib/math";
 
 export const Header = () => {
   const isHome = usePathname() === "/";
@@ -62,6 +63,19 @@ export const Header = () => {
 
     const removeProperty = (prop: string) => {
       document.documentElement.style.removeProperty(prop);
+    };
+
+    const updateHeaderStyles = () => {
+      if (!headerRef.current) return;
+
+      const { top, height } = headerRef.current.getBoundingClientRect();
+      const scrollY = clamp(
+        window.scrollY,
+        0,
+        document.body.scrollHeight - window.innerHeight
+      );
+
+      // const clamp;
     };
   }, [isHome]);
 

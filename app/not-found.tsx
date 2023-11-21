@@ -4,12 +4,15 @@ import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
 import { url } from "@/lib";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function NotFound() {
   return (
     <main className="h-screen">
       <div className=" absolute inset-0 w-full h-full ">
-        <Spline scene="https://prod.spline.design/VJKK7T6QR2A31FaW/scene.splinecode" />
+        <Suspense fallback={null}>
+          {/* <Spline scene="https://prod.spline.design/GYePUbXWS77b-c1U/scene.splinecode" /> */}
+        </Suspense>
       </div>
       <div className=" pointer-events-none absolute inset-0 flex items-center justify-center flex-col h-full w-full">
         <motion.h1
