@@ -12,7 +12,7 @@ const OutterContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
     );
   }
 );
-
+OutterContainer.displayName='OutterContainer';
 const InnerContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, children, ...props }, ref) => {
     return (
@@ -26,7 +26,7 @@ const InnerContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
     );
   }
 );
-
+InnerContainer.displayName='InnerContainer';
 const ContainerComponent = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ children, ...props }, ref) => {
     return (
@@ -36,6 +36,7 @@ const ContainerComponent = React.forwardRef<HTMLDivElement, ContainerProps>(
     );
   }
 );
+ContainerComponent.displayName='ContainerComponent';
 
 export const Container = Object.assign(ContainerComponent, {
   Outter: OutterContainer,
