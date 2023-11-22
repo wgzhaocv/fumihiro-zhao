@@ -74,8 +74,6 @@ export const Header = () => {
         0,
         document.body.scrollHeight - window.innerHeight
       );
-
-      // const clamp;
     };
   }, [isHome]);
 
