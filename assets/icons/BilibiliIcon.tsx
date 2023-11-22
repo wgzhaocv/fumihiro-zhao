@@ -1,4 +1,4 @@
-import { type IconProps } from '~/assets'
+import { type IconProps } from "@/assets";
 
 export function BilibiliIcon(props: IconProps = {}) {
   return (
@@ -17,5 +17,5 @@ export function BilibiliIcon(props: IconProps = {}) {
         fill="currentColor"
       />
     </svg>
-  )
+  );
 }

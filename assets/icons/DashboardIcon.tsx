@@ -1,4 +1,4 @@
-import { type IconProps } from '~/assets'
+import { type IconProps } from "@/assets";
 
 export function DashboardIcon(props: IconProps = {}) {
   return (
@@ -39,5 +39,5 @@ export function DashboardIcon(props: IconProps = {}) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }

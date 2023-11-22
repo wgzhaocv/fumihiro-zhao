@@ -1,4 +1,4 @@
-import { type IconProps } from '~/assets'
+import { type IconProps } from "@/assets";
 
 export function EyeOpenIcon(props: IconProps = {}) {
   return (
@@ -25,5 +25,5 @@ export function EyeOpenIcon(props: IconProps = {}) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }

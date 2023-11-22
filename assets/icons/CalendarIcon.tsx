@@ -1,4 +1,4 @@
-import { type IconProps } from '~/assets'
+import { type IconProps } from "@/assets";
 
 export function CalendarIcon(props: IconProps = {}) {
   return (
@@ -18,5 +18,5 @@ export function CalendarIcon(props: IconProps = {}) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-import { type IconProps } from '~/assets'
+import { type IconProps } from "@/assets";
 
 export function ClipboardDataIcon(props: IconProps = {}) {
   return (
@@ -20,5 +20,5 @@ export function ClipboardDataIcon(props: IconProps = {}) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }

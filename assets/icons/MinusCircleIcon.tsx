@@ -1,4 +1,4 @@
-import { type IconProps } from '~/assets'
+import { type IconProps } from "@/assets";
 
 export function MinusCircleIcon(props: IconProps = {}) {
   return (
@@ -18,5 +18,5 @@ export function MinusCircleIcon(props: IconProps = {}) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }

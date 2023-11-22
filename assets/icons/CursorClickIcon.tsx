@@ -1,4 +1,4 @@
-import { type IconProps } from '~/assets'
+import { type IconProps } from "@/assets";
 
 export function CursorClickIcon(props: IconProps = {}) {
   return (
@@ -18,5 +18,5 @@ export function CursorClickIcon(props: IconProps = {}) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
