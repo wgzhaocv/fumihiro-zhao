@@ -5,7 +5,9 @@ export const getCountOfSubscriber = async () => {
     return await prismaClient.subscribers.count({
       where: {
         NOT: {
-          subscribeAt: null,
+          subscribeAt: {
+            equals: null,
+          },
         },
       },
     });
