@@ -4,8 +4,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "./(main)/ThemeProvider";
 
 import { fullname, seo } from "@/lib/seo";
-import { url } from "@/lib";
-import { sansFont } from "@/lib/font";
 
 export const metadata: Metadata = {
   metadataBase: seo.url,
@@ -44,7 +42,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className="p-0 m-0 h-full font-sans antialiased">
+      <html
+        lang="en"
+        className="p-0 m-0 h-full font-sans antialiased"
+        suppressHydrationWarning
+      >
         <body className={"flex h-full flex-col"}>
           <ThemeProvider
             attribute="class"

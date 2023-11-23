@@ -6,13 +6,13 @@ type ContainerProps = React.ComponentPropsWithoutRef<"div">;
 const OutterContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div ref={ref} className={clsx("sm:px-8")} {...props}>
+      <div ref={ref} className={clsx("sm:px-8", className)} {...props}>
         <div className="mx-auto max-x-7xl lg:px-8">{children}</div>
       </div>
     );
   }
 );
-OutterContainer.displayName='OutterContainer';
+OutterContainer.displayName = "OutterContainer";
 const InnerContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, children, ...props }, ref) => {
     return (
@@ -26,7 +26,7 @@ const InnerContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
     );
   }
 );
-InnerContainer.displayName='InnerContainer';
+InnerContainer.displayName = "InnerContainer";
 const ContainerComponent = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ children, ...props }, ref) => {
     return (
@@ -36,7 +36,7 @@ const ContainerComponent = React.forwardRef<HTMLDivElement, ContainerProps>(
     );
   }
 );
-ContainerComponent.displayName='ContainerComponent';
+ContainerComponent.displayName = "ContainerComponent";
 
 export const Container = Object.assign(ContainerComponent, {
   Outter: OutterContainer,

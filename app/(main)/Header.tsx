@@ -20,7 +20,7 @@ import {
   UserButton,
   useUser,
 } from "@clerk/nextjs";
-import { GitHubBrandIcon, GoogleBrandIcon } from "@/assets";
+import { GitHubBrandIcon, GoogleBrandIcon, UserArrowLeftIcon } from "@/assets";
 import { url } from "@/lib";
 import {
   Tooltip,
@@ -64,6 +64,7 @@ export const Header = () => {
     const removeProperty = (prop: string) => {
       document.documentElement.style.removeProperty(prop);
     };
+    console.log(downDelay, upDelay, avatarRef.current);
 
     const updateHeaderStyles = () => {
       if (!headerRef.current) return;
@@ -74,6 +75,80 @@ export const Header = () => {
         0,
         document.body.scrollHeight - window.innerHeight
       );
+
+      // console.log(scrollY, downDelay, upDelay, height, top);
+
+      if (isInitial.current) {
+        setProperty("--header-position", "sticky");
+      }
+
+      setProperty("--content-offset", `${downDelay}px`);
+
+      if (isInitial.current || scrollY < downDelay) {
+        setProperty("--header-height", `${downDelay + height}px`);
+        setProperty("--header-mb", `${-downDelay}px`);
+      } else if (top + height < -upDelay) {
+        const offset = Math.max(height, scrollY - upDelay);
+
+        setProperty("--header-height", `${offset}px`);
+        setProperty("--header-mb", `${height - offset}px`);
+      } else if (top === 0) {
+        setProperty("--header-height", `${scrollY + height}px`);
+        setProperty("--header-mb", `${-scrollY}px`);
+      }
+
+      if (top === 0 && scrollY > 0 && scrollY > downDelay) {
+        setProperty("--header-inner-position", "fixed");
+        removeProperty("--avatar-top");
+        removeProperty("--header-top");
+      } else {
+        removeProperty("--header-inner-position");
+        setProperty("--avatar-top", "0px");
+        setProperty("--header-top", "0px");
+      }
+    };
+
+    const updateAvatarStyles = () => {
+      if (!isHome) {
+        return;
+      }
+
+      const fromScale = 1;
+      const toScale = 36 / 64;
+      const fromX = 0;
+      const toX = 2 / 16;
+
+      const scrollY = downDelay - window.scrollY;
+
+      let scale = (scrollY * (fromScale - toScale)) / downDelay + toScale;
+      scale = clamp(scale, fromScale, toScale);
+
+      let x = (scrollY * (fromX - toX)) / downDelay + toX;
+      x = clamp(x, fromX, toX);
+
+      avatarX.set(x);
+      avatarScale.set(scale);
+
+      const borderScale = 1 / (toScale / scale);
+
+      avatarBorderX.set((-toX + x) * borderScale);
+      avatarBorderScale.set(borderScale);
+
+      setProperty("--avatar-border-opacity", scale === toScale ? "1" : "0");
+    };
+
+    const setHeaderStyle = () => {
+      updateHeaderStyles();
+      updateAvatarStyles();
+      isInitial.current = false;
+    };
+
+    window.addEventListener("scroll", setHeaderStyle, { passive: true });
+    window.addEventListener("resize", setHeaderStyle);
+
+    return () => {
+      window.removeEventListener("scroll", setHeaderStyle);
+      window.removeEventListener("resize", setHeaderStyle);
     };
   }, [isHome]);
 
@@ -94,7 +169,7 @@ export const Header = () => {
             <>
               <div
                 ref={avatarRef}
-                className="order-last mt-[calc(theme(spacing.16) - theme(spacing.3))]"
+                className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
               ></div>
               <Container
                 className={"top-0 order-last -mb-3 pt-3"}
@@ -173,8 +248,8 @@ export const Header = () => {
                 </AnimatePresence>
               </motion.div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <NavigationBar.Desktop className="pointer-events-auto relative z-50 md:hidden" />
-                <NavigationBar.Mobile className="pointer-events-auto relative z-50 hidden md:block" />
+                <NavigationBar.Mobile className="pointer-events-auto relative z-50 md:hidden" />
+                <NavigationBar.Desktop className="pointer-events-auto relative z-50 hidden md:block" />
               </div>
               <motion.div
                 className="flex justify-end gap-3 md:flex-1"
@@ -199,7 +274,6 @@ const UserInfo = () => {
   const [tooltipOpen, setTooltipOpen] = React.useState(false);
   const pathname = usePathname();
   const { user } = useUser();
-  console.log(user);
 
   const StrategyIcon = useMemo(() => {
     const strategy = user?.primaryEmailAddress?.verification.strategy;
@@ -226,13 +300,7 @@ const UserInfo = () => {
                 avatarBox: "w-9 h-9 ring-2 ring-white/20",
               },
             }}
-          >
-            {StrategyIcon && (
-              <span className=" pointer-events-none absolute -bottom-1 -right-1 flex h-4 w-4 select-none items-center justify-center rounded-full bg-white dark:bg-zinc-900">
-                <StrategyIcon className="w-3 h-3" />
-              </span>
-            )}
-          </UserButton>
+          />
         </motion.div>
       </SignedIn>
       <SignedOut key="sign-in">
@@ -253,7 +321,9 @@ const UserInfo = () => {
                       "px-3 text-sm shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur",
                       "transition dark:from-zinc-900/50 dark::to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
                     )}
-                  ></button>
+                  >
+                    <UserArrowLeftIcon className="h-5 w-5" />
+                  </button>
                 </TooltipTrigger>
               </SignInButton>
               <AnimatePresence>

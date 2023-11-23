@@ -33,7 +33,7 @@ export const ThemeSwitch = () => {
   const { theme, setTheme, resolvedTheme } = useTheme();
 
   const ThemeIcon = useMemo(() => {
-    return themeMode[theme as themeModeTypeKey].icon ?? LightningIcon;
+    return themeMode[theme as themeModeTypeKey]?.icon ?? LightningIcon;
   }, [theme]);
 
   useEffect(() => setMounted(true), []);

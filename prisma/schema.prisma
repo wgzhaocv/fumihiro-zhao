@@ -1,5 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
+}
+
+model subscribers {
+  id            String    @id @default(uuid())
+  email         String    @db.VarChar(120)
+  token         String    @db.VarChar(50)
+  subscribeAt   DateTime  @default(now())
+  unsubscribeAt DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model newsLetters {
+  id        String    @id @default(uuid())
+  subject   String    @db.VarChar(200)
+  body      String    @db.Text
+  sentAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model comments {
+  id        String   @id @default(uuid())
+  userId    String   @db.VarChar(200)
+  userInfo  Json
+  postId    String   @db.VarChar(100)
+  parentId  String
+  body      Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId], name: "postId")
+}
+
+model guestBook {
+  id        String   @id @default(uuid())
+  userId    String   @db.VarChar(200)
+  userInfo  Json
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
