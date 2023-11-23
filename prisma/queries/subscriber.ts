@@ -6,7 +6,7 @@ export const getCountOfSubscriber = async () => {
       where: {
         NOT: {
           subscribeAt: {
-            equals: null,
+            equals: undefined,
           },
         },
       },
