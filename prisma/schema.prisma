@@ -12,7 +12,7 @@ model subscribers {
   id            String    @id @default(uuid())
   email         String    @db.VarChar(120)
   token         String    @db.VarChar(50)
-  subscribeAt   DateTime  @default(now())
+  subscribeAt   DateTime?
   unsubscribeAt DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt

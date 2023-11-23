@@ -76,7 +76,7 @@ export const Header = () => {
         document.body.scrollHeight - window.innerHeight
       );
 
-      // console.log(scrollY, downDelay, upDelay, height, top);
+      console.log(scrollY, downDelay, upDelay, height, top);
 
       if (isInitial.current) {
         setProperty("--header-position", "sticky");

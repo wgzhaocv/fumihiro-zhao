@@ -1,6 +1,5 @@
 import Hashids from "hashids";
 import { z } from "zod";
-import { guestBook } from "@prisma/client";
 
 export const GuestbookDtoSchema = z.object({
   id: z.string(),
