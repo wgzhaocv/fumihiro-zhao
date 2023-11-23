@@ -35,5 +35,6 @@ export const POST = async (req: NextRequest) => {
     }
 
     const token = crypto.randomUUID();
+    // create a email
   } catch (error) {}
 };
