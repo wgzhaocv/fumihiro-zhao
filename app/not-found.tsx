@@ -11,7 +11,7 @@ export default function NotFound() {
     <main className="h-screen">
       <div className=" absolute inset-0 w-full h-full ">
         <Suspense fallback={null}>
-          {/* <Spline scene="https://prod.spline.design/GYePUbXWS77b-c1U/scene.splinecode" /> */}
+          <Spline scene="https://prod.spline.design/iDyQT7aPtk1pjHzK/scene.splinecode" />
         </Suspense>
       </div>
       <div className=" pointer-events-none absolute inset-0 flex items-center justify-center flex-col h-full w-full">

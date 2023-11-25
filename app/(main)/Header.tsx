@@ -64,7 +64,6 @@ export const Header = () => {
     const removeProperty = (prop: string) => {
       document.documentElement.style.removeProperty(prop);
     };
-    console.log(downDelay, upDelay, avatarRef.current);
 
     const updateHeaderStyles = () => {
       if (!headerRef.current) return;
@@ -75,8 +74,6 @@ export const Header = () => {
         0,
         document.body.scrollHeight - window.innerHeight
       );
-
-      console.log(scrollY, downDelay, upDelay, height, top);
 
       if (isInitial.current) {
         setProperty("--header-position", "sticky");
@@ -275,15 +272,6 @@ const UserInfo = () => {
   const pathname = usePathname();
   const { user } = useUser();
 
-  const StrategyIcon = useMemo(() => {
-    const strategy = user?.primaryEmailAddress?.verification.strategy;
-    if (!strategy) return null;
-    if (strategy === "from_oauth_github") {
-      return GitHubBrandIcon;
-    } else if (strategy === "from_oauth_google") {
-      return GoogleBrandIcon;
-    }
-  }, [user?.primaryEmailAddress?.verification.strategy]);
   return (
     <AnimatePresence>
       <SignedIn key="user-info">

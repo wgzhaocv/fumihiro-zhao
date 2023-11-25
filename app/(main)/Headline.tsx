@@ -1,5 +1,7 @@
 "use client";
 
+import { SocialLink } from "@/components/links/SocialLink";
+import { socialItems } from "@/config/socialItems";
 import { fullname } from "@/lib/seo";
 import { motion } from "framer-motion";
 import Balancer from "react-wrap-balancer";
@@ -21,7 +23,9 @@ export const Headline = () => {
       >
         <Balancer>
           I'm {fullname}, a software engineer in Tokyo, I use typescript,
-          next.js,nest.js, and other tools to build web applications.
+          next.js, nest.js and other tools to build web applications.
+          <br />I enjoy trying diffrent things and sharing my knowledge with
+          others.😘
         </Balancer>
       </motion.p>
       <motion.div
@@ -35,7 +39,11 @@ export const Headline = () => {
           duration: 0.3,
           delay: 0.1,
         }}
-      ></motion.div>
+      >
+        {socialItems.map((item) => {
+          return <SocialLink key={item.label} platform={item.label} />;
+        })}
+      </motion.div>
     </div>
   );
 };
