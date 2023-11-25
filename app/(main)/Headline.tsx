@@ -22,7 +22,7 @@ export const Headline = () => {
         }}
       >
         <Balancer>
-          I'm {fullname}, a software engineer in Tokyo, I use typescript,
+          {"I'm"} {fullname}, a software engineer in Tokyo, I use typescript,
           next.js, nest.js and other tools to build web applications.
           <br />I enjoy trying diffrent things and sharing my knowledge with
           others.😘
