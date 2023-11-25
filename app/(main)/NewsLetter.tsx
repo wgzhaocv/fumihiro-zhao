@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { TiltedSendIcon } from "@/assets";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Balancer from "react-wrap-balancer";
 
 export const newsLetterFormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).min(1),
@@ -111,7 +112,9 @@ export const NewsLetter = ({ subCount }: { subCount?: number }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
           >
-            Please check your email to confirm your subscription.🥳
+            <Balancer>
+              Please check your email to confirm your subscription.🥳
+            </Balancer>
           </motion.p>
         )}
       </AnimatePresence>

@@ -3,6 +3,10 @@ import { prismaClient } from "@/prisma";
 import { Ratelimit } from "@upstash/ratelimit";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { resendClient } from "@/lib/mail";
+import { emailConfig } from "@/config/email";
+import ConfirmSubscriptionEmail from "@/emails/ConfirmSubscriptionEmail";
+import { url } from "@/lib";
 
 const newsletterFormSchema = z.object({
   email: z.string().email().min(1),
@@ -35,6 +39,26 @@ export const POST = async (req: NextRequest) => {
     }
 
     const token = crypto.randomUUID();
-    // create a email
-  } catch (error) {}
+    if (process.env.NODE_ENV === "production") {
+      console.log("Sending email to: ", emailConfig.from, parsedData.email);
+
+      await resendClient.emails.send({
+        from: emailConfig.from,
+        to: parsedData.email,
+        subject: "Confirm your subscription from fumihiro zhao",
+        react: ConfirmSubscriptionEmail({ link: url(`confirm/${token}`).href }),
+      });
+
+      await prismaClient.subscribers.create({
+        data: {
+          email: parsedData.email,
+          token,
+        },
+      });
+    }
+    return NextResponse.json({ status: "success" });
+  } catch (error) {
+    console.log("[NewsLetter]: ", error);
+    return NextResponse.error();
+  }
 };

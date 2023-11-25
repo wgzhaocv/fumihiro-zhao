@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "./(main)/ThemeProvider";
@@ -10,10 +10,7 @@ export const metadata: Metadata = {
   title: seo.title,
   description: seo.description,
   keywords: seo.keywords,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#000212" },
-  ],
+
   manifest: "/site.webmanifest",
   robots: {
     index: true,
@@ -35,6 +32,13 @@ export const metadata: Metadata = {
   },
 };
 
+const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#000212" },
+  ],
+};
+export { viewport };
 export default function RootLayout({
   children,
 }: {
