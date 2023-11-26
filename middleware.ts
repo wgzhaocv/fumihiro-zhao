@@ -39,10 +39,10 @@ const beforeAuthMiddleware = async (req: NextRequest) => {
       return NextResponse.redirect(nextUrl);
     }
 
-    if (nextUrl.pathname === "/error") {
-      nextUrl.pathname = "/";
-      return NextResponse.redirect(nextUrl);
-    }
+    // if (nextUrl.pathname === "/error") {
+    //   nextUrl.pathname = "/";
+    //   return NextResponse.rewrite(nextUrl);
+    // }
 
     if (geo && !isApi && process.env.VERCEL_ENV === "production") {
       const { country, city } = geo;
