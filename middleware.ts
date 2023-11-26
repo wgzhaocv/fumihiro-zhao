@@ -19,11 +19,8 @@ const beforeAuthMiddleware = async (req: NextRequest) => {
   const { geo, nextUrl } = req;
 
   let blockedIps: string[] = [];
-  // try {
-  //   blockedIps = (await get<string[]>(`blockedIps`)) ?? [];
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  blockedIps = (await get<string[]>(`blocked_ips`)) ?? [];
+
   const ip = getIp(req);
   const isApi = nextUrl.pathname.startsWith("/api/");
 
