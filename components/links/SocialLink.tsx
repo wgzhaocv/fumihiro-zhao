@@ -23,12 +23,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 type IconType = (props: IconProps) => JSX.Element;
 
-type PlatformInfo = {
-  icon: IconType;
-  platform: Platform;
-  label: string;
-};
-
 type SocialLinkProps = { platform?: Platform };
 
 export const SocialLink = ({ platform, ...props }: SocialLinkProps) => {
