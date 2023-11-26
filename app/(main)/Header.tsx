@@ -238,7 +238,7 @@ export const Header = () => {
                   {!isHome && (
                     <motion.div layoutId="avatar" layout>
                       <Avatar>
-                        <Avatar.Image large className="block w-full h-full" />
+                        <Avatar.Image />
                       </Avatar>
                     </motion.div>
                   )}
