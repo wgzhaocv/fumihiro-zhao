@@ -56,8 +56,8 @@ const beforeAuthMiddleware = async (req: NextRequest) => {
     return NextResponse.next();
   } catch (error) {
     console.log(error);
-    nextUrl.pathname = "/error";
-    return NextResponse.redirect(nextUrl);
+    // nextUrl.pathname = "/error";
+    // return NextResponse.redirect(nextUrl);
   }
 };
 export default authMiddleware({
