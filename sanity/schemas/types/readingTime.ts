@@ -1,4 +1,4 @@
-import ReadingTimeInput from "@/sanity/components/readingTimeInput";
+import ReadingTimeInput from "../../components/readingTimeInput";
 import { defineField } from "sanity";
 
 export const readingTimeType = defineField({

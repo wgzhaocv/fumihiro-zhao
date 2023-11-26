@@ -1,4 +1,4 @@
-import { PencilSwooshIcon } from "@/assets";
+import { PencilSwooshIcon } from "../../assets";
 import { defineField, defineType } from "sanity";
 import { z } from "zod";
 import { readingTimeType } from "./types/readingTime";
