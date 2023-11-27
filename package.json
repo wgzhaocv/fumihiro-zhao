@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\"  \"npx sanity dev --port 3333\" \"npx prisma studio --port 5555\"",
+    "dev": "next dev",
     "build": "npm run prisma:generate && next build",
     "prisma:generate": "prisma generate",
     "start": "next start",

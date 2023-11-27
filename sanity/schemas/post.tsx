@@ -2,6 +2,7 @@ import { PencilSwooshIcon } from "../../assets";
 import { defineField, defineType } from "sanity";
 import { z } from "zod";
 import { readingTimeType } from "./types/readingTime";
+import category from "./types/category";
 
 export const Post = z.object({
   _id: z.string(),
@@ -57,6 +58,7 @@ export default defineType({
       name: "categories",
       title: "Categories",
       type: "array",
+      of: [{ type: "reference", to: { type: "category" } }],
     }),
     defineField({
       name: "publishedAt",
