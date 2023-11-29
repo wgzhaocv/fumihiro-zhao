@@ -1,7 +1,7 @@
 import ReadingTimeInput from "../../components/readingTimeInput";
-import { defineField } from "sanity";
+import { defineField, defineType } from "sanity";
 
-export const readingTimeType = defineField({
+export const readingTimeType = defineType({
   name: "readingTime",
   type: "number",
   title: "Reading Time",

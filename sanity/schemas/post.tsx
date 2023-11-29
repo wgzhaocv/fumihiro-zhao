@@ -1,5 +1,5 @@
 import { PencilSwooshIcon } from "../../assets";
-import { defineField, defineType } from "sanity";
+import { PortableTextInputProps, defineField, defineType } from "sanity";
 import { z } from "zod";
 import { readingTimeType } from "./types/readingTime";
 import category from "./types/category";
@@ -58,6 +58,7 @@ export default defineType({
       name: "categories",
       title: "Categories",
       type: "array",
+      //@ts-ignore
       of: [{ type: "reference", to: { type: "category" } }],
     }),
     defineField({
