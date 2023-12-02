@@ -65,3 +65,11 @@
     --ring: 240 4.9% 83.9%;
   }
 }
+
+::selection {
+  background-color: theme("colors.lime.500");
+  color: theme("colors.lime.950");
+}
+html {
+  font-size: x-larger;
+}

@@ -1,7 +1,7 @@
 import { getDate } from "@/lib/date";
 import { groq } from "next-sanity";
 import { clientFetch } from "./lib/client";
-import { Post } from "./schemas/post";
+import { Post, PostDetail } from "./schemas/post";
 
 export const getAllLastestPostsSlugQuries = () => groq`
 *[_type=="post"]&&!(_id in path("drafts.**"))
@@ -52,3 +52,52 @@ export const getBlogPostsQueries = ({
 export const getBlogPosts = (options: GetBlogPostsOptions) => {
   return clientFetch<Post[]>(getBlogPostsQueries(options));
 };
+
+export const getBlogPostQuery = groq`
+*[_type=="post" && slug.current==$slug && !(_id in path("drafts.**"))][0]{
+    _id,
+    title,
+    "slug": slug.current,
+    "categories": categories[]->title,
+    description,
+    publishedAt,
+    readingTime,
+    mood,
+    body[]{
+      ...,
+      _type=="image" => {
+        "url":asset->url,
+        "lqip":asset->metadata.lqip,
+        "dimensions":asset->metadata.dimensions,
+        ...
+      }
+    },
+    "headings":body[length(style)>1 && style match "h*"],
+    mainImg{
+        _ref,
+        asset->{
+            url,
+            "lqip":metadata.lqip,
+            "dominant":metadata.palette.dominant,
+        }
+    },
+    "related":*[_type=="post" && slug.current!=$slug && count(categories[@._ref in ^.^.categories[]._ref]) > 0 && !(_id in path("drafts.**"))]| order(publishedAt desc, _createdAt desc)[0..2]{
+      _id,
+      title,
+      "slug": slug.current,
+      "categories": categories[]->title,
+      publishedAt,
+      readingTime,
+      mainImage {
+        _ref,
+        asset->{
+          url,
+          "lqip": metadata.lqip,
+          "dominant": metadata.palette.dominant
+        }
+      },
+    }
+}
+`;
+export const getBlogPost = (slug: string) =>
+  clientFetch<PostDetail | undefined>(getBlogPostQuery, { slug });
