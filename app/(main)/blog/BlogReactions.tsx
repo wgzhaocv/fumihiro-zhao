@@ -79,7 +79,7 @@ const BlogReactions = ({ _id, mood, reactions }: BlogReactionsProps) => {
       }}
       transition={{
         type: "spring",
-        delay: 0.5,
+        delay: 1,
         duration: 0.55,
         damping: 15,
         stiffness: 180,

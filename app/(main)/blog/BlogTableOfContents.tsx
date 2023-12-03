@@ -65,7 +65,21 @@ type BlogTableOfContentsProps = {
 };
 
 const BlogTableOfContents = ({ headings }: BlogTableOfContentsProps) => {
-  const outline = parseOutline(headings);
+  const outline = React.useMemo(() => parseOutline(headings), []);
+  const outlineIndent = React.useMemo(() => {
+    const headingSizes = Array.from(
+      outline.reduce((pre, cur) => {
+        return pre.add(parseInt(cur.style.substring(1)));
+      }, new Set<number>())
+    )
+      .sort()
+      .reduce((pre, cur, idx) => {
+        const style = `h${cur}` as (typeof outline)[0]["style"];
+        pre[style] = `ml-${idx + 1}`;
+        return pre;
+      }, {} as Record<(typeof outline)[0]["style"], string>);
+    return headingSizes;
+  }, [outline]);
   const { scrollY } = useScroll();
   const [highlighedHeading, setHighlightedHeading] = React.useState<string>("");
   const articleEleRef = React.useRef<HTMLDivElement | null>(null);
@@ -142,8 +156,7 @@ const BlogTableOfContents = ({ headings }: BlogTableOfContentsProps) => {
           variants={itemVariants}
           className={clsx(
             "text-[12px] font-medium leading-[18px] trasition-colors duration-300",
-            item.style === "h3" && "ml-1",
-            item.style === "h4" && "ml-2",
+            outlineIndent[item.style],
             highlighedHeading === item.id
               ? "text-zinc-900 dark:text-zinc-200"
               : "hover:text-zinc-700 dark:hover:text-zincc-400 group-hover:[&:not(:hover)]:text-zinc-400 dark:group-hover:[&:not(:hover)]:text-zinc-600"
