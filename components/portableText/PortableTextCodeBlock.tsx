@@ -3,6 +3,9 @@
 import { PortableTextComponentProps } from "@portabletext/react";
 import React from "react";
 import { ClientOnly } from "../ClientOnly";
+import { ElegantTooltip } from "../ui/tooltip";
+import { ClipboardCheckIcon, ClipboardDataIcon } from "@/assets";
+import SyntaxHighlighter from "react-syntax-highlighter";
 
 export const PortableTextCodeBlock = ({
   value,
@@ -44,7 +47,35 @@ export const PortableTextCodeBlock = ({
                 </div>
               </>
             )}
+            <div className="absolute right-0 top-2 flex items-center h-8 pr-4">
+              <div className="relative -mr-0.5 flex">
+                <ElegantTooltip content={"copy"}>
+                  <button
+                    type="button"
+                    className="text-zinc-400 hover:text-zinc-500 dark:text-zinc-500 dar:hover:text-zinc-400"
+                    onClick={copyToClipboard}
+                  >
+                    {copied ? (
+                      <ClipboardCheckIcon className="w-5 h-5" />
+                    ) : (
+                      <ClipboardDataIcon className="w-5 h-5" />
+                    )}
+                  </button>
+                </ElegantTooltip>
+              </div>
+            </div>
           </div>
+          <SyntaxHighlighter
+            language={value.language}
+            showLineNumbers
+            useInlineStyles={false}
+            codeTagProps={{
+              style: {},
+              className: `language-${value.language}`,
+            }}
+          >
+            {value.code}
+          </SyntaxHighlighter>
         </>
       </ClientOnly>
     </div>

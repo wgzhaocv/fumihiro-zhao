@@ -1,5 +1,5 @@
 "use client";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
 
 import {
   PortableTextBlocksBlockquote,
@@ -11,8 +11,10 @@ import {
   PortableTextBlocksListItem,
   PortableTextBlocksNormal,
 } from "./PortableTextBlocks";
+import { PortableTextCodeBlock } from "./PortableTextCodeBlock";
+import { PortableTextImage } from "./PortableTextImage";
 
-const componnets = {
+const myComponnets = {
   block: {
     normal: PortableTextBlocksNormal,
     h1: PortableTextBlocksH1,
@@ -23,13 +25,22 @@ const componnets = {
     blockquote: PortableTextBlocksBlockquote,
   },
   listItem: PortableTextBlocksListItem,
+  type: {
+    codeBlock: PortableTextCodeBlock,
+    image: PortableTextImage,
+  },
 };
 
 type PostPortableTextProps = {
   value: any;
+  components?: PortableTextComponents;
 };
 
 const PostPortableText = ({ value }: PostPortableTextProps) => {
-  return <>PostPortableText</>;
+  console.log("value", value);
+  return (
+    <></>
+    // <PostPortableText value={value} components={ myComponnets} />
+  );
 };
 export default PostPortableText;

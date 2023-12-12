@@ -4,6 +4,7 @@ import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
@@ -29,10 +30,42 @@ const TooltipContent = React.forwardRef<
 ));
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
+type ElegantTooltipProps = {
+  children: React.ReactNode;
+  content: React.ReactNode;
+};
+
+const ElegantTooltip = ({ children, content }: ElegantTooltipProps) => {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <TooltipProvider disableHoverableContent delayDuration={0.2}>
+      <Tooltip open={open} onOpenChange={setOpen}>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
+        {open && (
+          <AnimatePresence>
+            <TooltipPortal forceMount>
+              <TooltipContent asChild>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                >
+                  {content}
+                </motion.div>
+              </TooltipContent>
+            </TooltipPortal>
+          </AnimatePresence>
+        )}
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
 export {
   Tooltip,
   TooltipPortal,
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
+  ElegantTooltip,
 };

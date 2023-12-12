@@ -8,7 +8,6 @@ export const PortableTextBlocksNormal = ({
   children,
 }: PortableTextComponentProps<any>) => {
   const isEmpty = value.children
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     .map((child: any) => ("text" in child ? child.text : ""))
     .join("");
   return (
