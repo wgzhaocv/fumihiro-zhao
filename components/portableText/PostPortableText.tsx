@@ -25,7 +25,7 @@ const myComponnets = {
     blockquote: PortableTextBlocksBlockquote,
   },
   listItem: PortableTextBlocksListItem,
-  type: {
+  types: {
     codeBlock: PortableTextCodeBlock,
     image: PortableTextImage,
   },
@@ -37,10 +37,6 @@ type PostPortableTextProps = {
 };
 
 const PostPortableText = ({ value }: PostPortableTextProps) => {
-  console.log("value", value);
-  return (
-    <></>
-    // <PostPortableText value={value} components={ myComponnets} />
-  );
+  return <PortableText value={value} components={myComponnets} />;
 };
 export default PostPortableText;

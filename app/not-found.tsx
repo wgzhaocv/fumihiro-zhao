@@ -9,11 +9,7 @@ import { Suspense } from "react";
 export default function NotFound() {
   return (
     <main className="h-screen">
-      <div className=" absolute inset-0 w-full h-full ">
-        <Suspense fallback={null}>
-          <Spline scene="https://prod.spline.design/iDyQT7aPtk1pjHzK/scene.splinecode" />
-        </Suspense>
-      </div>
+      <div className=" absolute inset-0 w-full h-full "></div>
       <div className=" pointer-events-none absolute inset-0 flex items-center justify-center flex-col h-full w-full">
         <motion.h1
           className="select-none text-[35vmin] font-bold text-white mix-blend-overlay"

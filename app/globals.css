@@ -72,4 +72,5 @@
 }
 html {
   font-size: x-larger;
+  scroll-behavior: smooth;
 }
