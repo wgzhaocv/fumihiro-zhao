@@ -61,7 +61,7 @@ const beforeAuthMiddleware = async (req: NextRequest) => {
   }
 };
 export default authMiddleware({
-  beforeAuth: beforeAuthMiddleware,
+  // beforeAuth: beforeAuthMiddleware,
   publicRoutes: [
     "/",
     "/api(.*)",
